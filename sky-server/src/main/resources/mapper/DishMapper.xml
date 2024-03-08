@@ -9,6 +9,20 @@
             (#{name},#{categoryId},#{price},#{image},#{description},#{status},#{createTime},#{updateTime},#{createUser},
              #{updateUser})
     </insert>
+    <update id="update">
+        update dish
+            <set>
+            <if test="name!=null and name !=''">dish.name = #{name},</if>
+            <if test="categoryId!=null">dish.category_id = #{categoryId},</if>
+            <if test="price!=null">dish.price = #{price},</if>
+            <if test="image!=null">dish.image = #{image},</if>
+            <if test="description!=null">dish.description = #{description},</if>
+            <if test="status!=null">dish.status = #{status},</if>
+            <if test="updateTime!=null">dish.update_time = #{updateTime},</if>
+            <if test="updateUser!=null">dish.update_user = #{updateUser},</if>
+    </set>
+        where id = #{id}
+    </update>
     <delete id="delete">
         delete from dish where id in
                          <foreach collection="ids" item="id" separator="," open="(" close=")">
