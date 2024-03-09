@@ -38,8 +38,10 @@ public class UserController {
         User user = userService.login(userLoginDTO);
 
         Map<String, Object> claims = new HashMap<>();
-        claims.put(JwtClaimsConstant.EMP_ID,user.getOpenid());
-        String token = JwtUtil.createJWT(jwtProperties.getUserSecretKey(), jwtProperties.getUserTtl(), claims);
+        claims.put(JwtClaimsConstant.USER_ID,user.getId());
+        String token = JwtUtil.createJWT(
+                jwtProperties.getUserSecretKey(),
+                jwtProperties.getUserTtl(), claims);
         UserLoginVO userLoginVO1 = UserLoginVO.builder()
                 .id(user.getId())
                 .openid(user.getOpenid())

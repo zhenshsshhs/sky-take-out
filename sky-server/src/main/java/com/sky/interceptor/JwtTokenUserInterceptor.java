@@ -47,6 +47,7 @@ public class JwtTokenUserInterceptor implements HandlerInterceptor {
         } catch (Exception ex) {
             //4、不通过，响应401状态码
             response.setStatus(401);
+            log.info("JwtTokenUserInterceptor：用户token认证失败");
             return false;
         }
     }
