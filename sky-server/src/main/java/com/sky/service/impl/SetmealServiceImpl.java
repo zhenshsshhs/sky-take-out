@@ -71,6 +71,7 @@ public class SetmealServiceImpl implements SetmealService {
         Setmeal setmeal = new Setmeal();
         BeanUtils.copyProperties(setmealDTO,setmeal);
         setmealMapper.insert(setmeal);
+        setmealDTO.setId(setmeal.getId());
 
         // 新增套餐菜品
         Long setmealId = setmeal.getId();
