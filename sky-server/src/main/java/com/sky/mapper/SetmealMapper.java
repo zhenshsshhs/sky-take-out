@@ -49,6 +49,8 @@ public interface SetmealMapper {
 
     List<SetmealDish> getSetmeaDishBySetmealId(Long setmealId);
 
+    @Select("select * from setmeal where id = #{setmealId}")
+    Setmeal getById(Long setmealId);
     @AutoFill(OperationType.UPDATE)
     void update(Setmeal setmeal);
 
