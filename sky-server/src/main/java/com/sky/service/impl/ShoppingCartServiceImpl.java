@@ -70,4 +70,45 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 
 
     }
+
+    @Override
+    public List<ShoppingCart> list() {
+        Long currentId = BaseContext.getCurrentId();
+        ShoppingCart shoppingCart = ShoppingCart.builder()
+                .userId(currentId).build();
+        List<ShoppingCart> list = shoppingCartMapper.list(shoppingCart);
+        return list;
+    }
+
+    @Override
+    public void subShoppingCart(ShoppingCartDTO shoppingCartDTO) {
+        ShoppingCart shoppingCart = new ShoppingCart();
+        BeanUtils.copyProperties(shoppingCartDTO,shoppingCart);
+
+        //查询购物车中是否存在该菜品的数量还有多少个，
+        List<ShoppingCart> list = shoppingCartMapper.list(shoppingCart);
+
+        if (list!= null && list.size()>0){
+
+            ShoppingCart cart = list.get(0);
+            Integer number = cart.getNumber();
+            if (number<=1){
+                // 如果只有一个就删除该字段
+                shoppingCartMapper.deleteById(cart.getId());
+            }else {
+                // 如果有超过一个就减一
+                cart.setNumber(cart.getNumber()-1);
+                shoppingCartMapper.updateNumberById(cart);
+
+            }
+        }
+
+
+    }
+
+    @Override
+    public void cleanShoppingCart() {
+        Long currentId = BaseContext.getCurrentId();
+        shoppingCartMapper.deleteByUserId(currentId);
+    }
 }
