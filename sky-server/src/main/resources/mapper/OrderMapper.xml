@@ -38,6 +38,9 @@
             <if test="deliveryTime != null">
                 delivery_time = #{deliveryTime}
             </if>
+            <if test="orderTime != null">
+                order_time = #{orderTime}
+            </if>
         </set>
         where id = #{id}
     </update>
