@@ -45,8 +45,9 @@ public class PayNotifyController {
         log.info("支付成功回调：{}", body);
 
         //数据解密
-        String plainText = decryptData(body);
-        log.info("解密后的文本：{}", plainText);
+//        String plainText = decryptData(body);
+//        log.info("解密后的文本：{}", plainText);
+        String plainText = body;
 
         JSONObject jsonObject = JSON.parseObject(plainText);
         String outTradeNo = jsonObject.getString("out_trade_no");//商户平台订单号
