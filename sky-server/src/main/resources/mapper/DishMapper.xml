@@ -23,6 +23,7 @@
     </set>
         where id = #{id}
     </update>
+
     <delete id="delete">
         delete from dish where id in
                          <foreach collection="ids" item="id" separator="," open="(" close=")">
@@ -50,6 +51,17 @@
             </if>
             <if test="status != null">
                 and status = #{status}
+            </if>
+        </where>
+    </select>
+    <select id="countByMap" resultType="java.lang.Integer">
+        select count(id) from dish
+        <where>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+            <if test="categoryId != null">
+                and category_id = #{categoryId}
             </if>
         </where>
     </select>
