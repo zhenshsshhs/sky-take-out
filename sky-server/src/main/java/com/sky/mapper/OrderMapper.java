@@ -11,6 +11,7 @@ import org.springframework.core.annotation.Order;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface OrderMapper {
@@ -73,5 +74,5 @@ public interface OrderMapper {
     Integer countStatus(Integer status);
 
 
-
+    Double getByMap(Map map);
 }
