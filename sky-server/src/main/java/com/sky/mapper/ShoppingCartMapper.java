@@ -30,4 +30,9 @@ public interface ShoppingCartMapper {
     @Delete("delete from shopping_cart where user_id=#{id}")
     void deleteByUserId(Long id);
 
-}
+    /**
+     * 批量插入购物车数据
+     *
+     * @param shoppingCartList
+     */
+    void insertBatch(List<ShoppingCart> shoppingCartList);}
